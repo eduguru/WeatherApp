@@ -8,43 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var locationManager = LocationManager()
+    
     var body: some View {
-        ZStack {
-            Color(.sunny)
-                .ignoresSafeArea()
-            ScrollView {
-                VStack {
-                    HeaderView(
-                        imageName: "forest_sunny",
-                        weatherStatusModel: WeatherStatusModel(
-                            value: "77",
-                            title: "Sunny",
-                            valueFont: .system(size: 66, weight: .heavy),
-                            titleFont: .title3)
-                    )
-                    
-                    WeatherDayRangeView()
-                    
-                    Divider()
-                        .frame(height: 1)
-                        .background(.white)
-                    
-                    VStack {
-                        List(DayOfWeek.allCases, id: \.hashValue) { day in
-                            
-                        }
-                        ForEach( 0 ..< DayOfWeek.allCases.count, id:\.self) { index in
-                            let dayName = DayOfWeek.allCases[index]
-                            WeatherSummaryView(dayName: dayName.rawValue.capitalized)
-                         }
-                        
-                    }
-                    .padding()
-                    
-                    Spacer()
-                }
+        if let location = locationManager.location {
+            HomeView()
+                .environmentObject(locationManager)
+        } else {
+            if locationManager.isLoading {
+                LoadingView()
+            } else {
+                WelcomeView()
+                    .environmentObject(locationManager)
             }
-            .ignoresSafeArea()
         }
     }
 }
