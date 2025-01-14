@@ -18,6 +18,10 @@ struct WeatherStatusView: View {
             Text(weatherStatusModel.title)
                 .font(weatherStatusModel.titleFont)
                 .foregroundColor(.white)
+            
+            Text(weatherStatusModel.desc ?? "")
+                .font(.caption)
+                .foregroundColor(Color.white)
         }
         .bold()
     }

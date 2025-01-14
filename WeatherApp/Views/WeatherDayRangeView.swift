@@ -7,25 +7,27 @@
 import SwiftUI
 
 struct WeatherDayRangeView: View {
+    var response: MainResponse?
+    
     var body: some View {
         HStack(alignment: .center) {
             WeatherStatusView(weatherStatusModel: WeatherStatusModel(
-                value: "77",
-                title: "Sunny",
+                value: "\(response?.tempMin.roundDouble() ?? "0.0")°",
+                title: "Min",
                 valueFont: .title,
                 titleFont: .title3)
             )
             Spacer()
             WeatherStatusView(weatherStatusModel: WeatherStatusModel(
-                value: "77",
-                title: "Sunny",
+                value: "\(response?.temp.roundDouble() ?? "0.0")°",
+                title: "Current",
                 valueFont: .title,
                 titleFont: .title3)
             )
             Spacer()
             WeatherStatusView(weatherStatusModel: WeatherStatusModel(
-                value: "77",
-                title: "Sunny",
+                value: "\(response?.tempMax.roundDouble() ?? "0.0")°",
+                title: "Max",
                 valueFont: .title,
                 titleFont: .title3)
             )

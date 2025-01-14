@@ -12,4 +12,5 @@ struct WeatherStatusModel: Hashable, Identifiable {
     let title: String
     let valueFont: Font
     let titleFont: Font
+    var desc: String? = nil
 }

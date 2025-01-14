@@ -8,6 +8,9 @@ import SwiftUI
 
 struct WeatherSummaryView: View {
     let dayName: String
+    let imageName: String
+    let temp: String
+    
     var body: some View {
         HStack {
             Text(dayName)
@@ -15,11 +18,11 @@ struct WeatherSummaryView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Image(.partlysunny)
+            Image(imageName)
                 .resizable()
                 .frame(width: 35, height: 50)
             
-            Text("20°")
+            Text(temp)
                 .font(.title3)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .trailing)

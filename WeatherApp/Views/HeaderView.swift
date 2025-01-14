@@ -20,7 +20,6 @@ struct HeaderView: View {
             
             WeatherStatusView(weatherStatusModel: weatherStatusModel)
                 .padding(EdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0))
-            
         }
     }
 }
