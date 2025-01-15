@@ -1,8 +1,8 @@
 # iOS WeatherApp with SwiftUI
 
 <div style="width: 1000px; height 600px;">
-<img src="Screenshots/IMG_3198.png" width="30%" height="30%" align="right">
-<img src="Screenshots/IMG_3199.png" width="30%" height="30%" align="right">
+<img src="WeatherApp/Screenshots/IMG_3198.png" width="30%" height="30%" align="right">
+<img src="WeatherApp/Screenshots/IMG_3199.png" width="30%" height="30%" align="right">
 </div>
 
 ## Overview
