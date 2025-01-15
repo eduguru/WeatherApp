@@ -9,7 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var locationManager: LocationManager
+    
     @State var responseObject: WeatherResponseBody?
+    @State var forecastRsponseObject: ForecastResponseBody?
+    
     @StateObject var viewModel: WeatherViewModel  = WeatherViewModel()
     
     var body: some View {
@@ -36,19 +39,19 @@ struct HomeView: View {
                         .background(.white)
                     
                     VStack {
-                        List(DayOfWeek.allCases, id: \.hashValue) { day in
+                        if let forecastResponseObject = viewModel.forecastResponseObject {
+                            let grouped = viewModel.groupedByDate(forecastResponseObject: forecastResponseObject)
+                            
+                            ForEach((1 ..< grouped.count), id: \.self) {
+                                let list = grouped[$0]
+                                WeatherSummaryView(
+                                    dayName: list.formattedDate,
+                                    imageName: "icon",
+                                    temp: "\(list.main.temp.roundDouble())°"
+                                )
+                            }
                             
                         }
-                        ForEach( 0 ..< (viewModel.responseObject?.weather.count ?? 0), id:\.self) { index in
-                            if let item = viewModel.responseObject?.weather[index ?? 0] {
-                                let dayName = item.main
-                                WeatherSummaryView(
-                                    dayName: item.main,
-                                    imageName: item.icon,
-                                    temp: item.description)
-                            }
-                         }
-                        
                     }
                     .padding()
                     
@@ -59,6 +62,11 @@ struct HomeView: View {
         }
         .task {
             await viewModel.fetchWeather(
+                lat: locationManager.location?.latitude ?? 0.0,
+                long: locationManager.location?.longitude ?? 0.0
+            )
+            
+            await viewModel.fetchWeatherForecast(
                 lat: locationManager.location?.latitude ?? 0.0,
                 long: locationManager.location?.longitude ?? 0.0
             )
