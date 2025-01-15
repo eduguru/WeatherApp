@@ -13,19 +13,22 @@ struct HomeView: View {
     @State var responseObject: WeatherResponseBody?
     @State var forecastRsponseObject: ForecastResponseBody?
     
+    @State var color: Color = .gray
+    @State var imageName: String = ""
+    
     @StateObject var viewModel: WeatherViewModel  = WeatherViewModel()
     
     var body: some View {
         ZStack {
-            Color(.sunny)
+            Color(viewModel.responseObject?.weather[0].main.backgroundColor ?? color)
                 .ignoresSafeArea()
             ScrollView {
                 VStack {
                     HeaderView(
-                        imageName: "forest_sunny",
+                        imageName: viewModel.responseObject?.weather[0].main.imageName ?? imageName,
                         weatherStatusModel: WeatherStatusModel(
                             value: "\(viewModel.responseObject?.main.temp.roundDouble() ?? "0.0")°",
-                            title: "\(viewModel.responseObject?.weather[0].main ?? "")°",
+                            title: "\(viewModel.responseObject?.weather[0].main.rawValue ?? "")",
                             valueFont: .system(size: 66, weight: .heavy),
                             titleFont: .title3,
                             desc: "\(viewModel.responseObject?.name ?? "")"
@@ -46,7 +49,7 @@ struct HomeView: View {
                                 let list = grouped[$0]
                                 WeatherSummaryView(
                                     dayName: list.formattedDate,
-                                    imageName: "icon",
+                                    imageName: list.weather[0].main.iconName,
                                     temp: "\(list.main.temp.roundDouble())°"
                                 )
                             }

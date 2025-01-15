@@ -8,7 +8,7 @@ import Foundation
 
 struct WeatherResponse: Decodable {
     var id: Double
-    var main: String
+    var main: MainEnum
     var description: String
     var icon: String
 }

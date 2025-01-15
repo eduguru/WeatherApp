@@ -94,12 +94,6 @@ struct Weather: Codable {
     let description, icon: String
 }
 
-enum MainEnum: String, Codable {
-    case clear = "Clear"
-    case clouds = "Clouds"
-    case snow = "Snow"
-}
-
 // MARK: - Wind
 struct Wind: Codable {
     let speed: Double

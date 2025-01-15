@@ -6,6 +6,7 @@
 //
 import Foundation
 
+// https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=4674c892c7a1d0d7f6dc4d165a24a8bd
 struct WeatherEndpoint: Endpoint {
     let lat: Double
     let long: Double
